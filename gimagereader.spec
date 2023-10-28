@@ -24,12 +24,15 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	gettext
 BuildRequires:	gomp-devel
 BuildRequires:	intltool
+BuildRequires:	libcurl-devel
 BuildRequires:	pkgconfig(ddjvuapi)
 BuildRequires:	pkgconfig(json-glib-1.0)
+BuildRequires:	pkgconfig(libarchive)
 BuildRequires:	pkgconfig(libxml++-2.6)
 BuildRequires:	pkgconfig(libpodofo)
 BuildRequires:	pkgconfig(tesseract)
 BuildRequires:	pkgconfig(sane-backends)
+BuildRequires:	python%{pyver}dist(pygobject)
 #BuildRequires:	libappstream-glib
 # gtk interface
 BuildRequires:	pkgconfig(cairomm-1.0)
@@ -37,22 +40,33 @@ BuildRequires:	pkgconfig(gtkmm-3.0)
 BuildRequires:	pkgconfig(gtksourceviewmm-3.0)
 BuildRequires:	pkgconfig(gtksourceview-3.0)
 BuildRequires:	pkgconfig(gtkspellmm-3.0) >= 3.0.4
+BuildRequires:	pkgconfig(libzip)
 BuildRequires:	pkgconfig(poppler-glib)
 # qt5 interface
 BuildRequires:	qmake5
+BuildRequires:	cmake(Qt5)
+BuildRequires:	cmake(Qt5Concurrent)
 BuildRequires:	cmake(Qt5Core)
 BuildRequires:	cmake(Qt5DBus)
 BuildRequires:	cmake(Qt5Network)
-BuildRequires:	cmake(quazip-qt5)
+BuildRequires:	cmake(Qt5PrintSupport)
 BuildRequires:	cmake(Qt5Widgets)
+BuildRequires:	cmake(Qt5Xml)
+BuildRequires:	cmake(quazip-qt5)
 BuildRequires:	pkgconfig(poppler-qt5)
 BuildRequires:	pkgconfig(QtSpell-qt5)
 # qt6 interface
 BuildRequires:	qmake-qt6
+BuildRequires:	cmake(Qt6)
+BuildRequires:	cmake(Qt6Concurrent)
 BuildRequires:	cmake(Qt6Core)
+BuildRequires:	cmake(Qt6Core5Compat)
 BuildRequires:	cmake(Qt6DBus)
 BuildRequires:	cmake(Qt6Network)
+BuildRequires:	cmake(Qt6PrintSupport)
 BuildRequires:	cmake(Qt6Widgets)
+BuildRequires:	cmake(Qt6Xml)
+BuildRequires:	cmake(quazip-qt6)
 BuildRequires:	pkgconfig(poppler-qt6)
 BuildRequires:	pkgconfig(QtSpell-qt6)
 
