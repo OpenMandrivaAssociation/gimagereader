@@ -24,10 +24,10 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	gettext
 BuildRequires:	gomp-devel
 BuildRequires:	intltool
-BuildRequires:	libcurl-devel
 BuildRequires:	pkgconfig(ddjvuapi)
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(libarchive)
+BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libxml++-2.6)
 BuildRequires:	pkgconfig(libpodofo)
 BuildRequires:	pkgconfig(tesseract)
