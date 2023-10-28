@@ -1,0 +1,46 @@
+diff -ur gimagereader-3.4.1/gtk/src/Config.cc gimagereader-3.4.1_patched/gtk/src/Config.cc
+--- gimagereader-3.4.1/gtk/src/Config.cc	2023-01-29 19:49:54.000000000 +0300
++++ gimagereader-3.4.1_patched/gtk/src/Config.cc	2023-04-21 16:10:37.299806222 +0300
+@@ -225,7 +225,7 @@
+ 		if(Gio::File::create_for_path(Glib::build_filename(dataDir, "myspell"))->query_exists()) {
+ 			return Glib::build_filename(dataDir, "myspell");
+ 		} else {
+-			return Glib::build_filename(dataDir, "hunspell");
++			return Glib::build_filename(dataDir, "dict", "ooo");
+ 		}
+ #else
+ 		return Glib::build_filename(dataDir, "myspell", "dicts");
+diff -ur gimagereader-3.4.1/gtk/src/MainWindow.cc gimagereader-3.4.1_patched/gtk/src/MainWindow.cc
+--- gimagereader-3.4.1/gtk/src/MainWindow.cc	2023-01-29 19:49:54.000000000 +0300
++++ gimagereader-3.4.1_patched/gtk/src/MainWindow.cc	2023-04-21 15:57:04.166840882 +0300
+@@ -536,6 +536,7 @@
+ 	for(const Glib::ustring& langCulture : m_config->searchLangCultures(code)) {
+ 		files.push_back("/usr/share/myspell/" + langCulture + ".dic");
+ 		files.push_back("/usr/share/hunspell/" + langCulture + ".dic");
++		files.push_back("/usr/share/dict/ooo/" + langCulture + ".dic");
+ 	}
+ 	std::vector<Glib::VariantBase> params = { Glib::Variant<std::uint32_t>::create(xid),
+ 	                                          Glib::Variant<std::vector<Glib::ustring>>::create(files),
+diff -ur gimagereader-3.4.1/qt/src/Config.cc gimagereader-3.4.1_patched/qt/src/Config.cc
+--- gimagereader-3.4.1/qt/src/Config.cc	2023-01-29 19:49:54.000000000 +0300
++++ gimagereader-3.4.1_patched/qt/src/Config.cc	2023-04-21 16:12:04.477766930 +0300
+@@ -208,7 +208,7 @@
+ 		if(QDir(dataDir.absoluteFilePath("myspell")).exists()) {
+ 			return dataDir.absoluteFilePath("myspell");
+ 		} else {
+-			return dataDir.absoluteFilePath("hunspell");
++			return dataDir.absoluteFilePath("dict/ooo");
+ 		}
+ #else
+ 		return dataDir.absoluteFilePath("myspell/dicts");
+diff -ur gimagereader-3.4.1/qt/src/MainWindow.cc gimagereader-3.4.1_patched/qt/src/MainWindow.cc
+--- gimagereader-3.4.1/qt/src/MainWindow.cc	2023-01-29 19:49:54.000000000 +0300
++++ gimagereader-3.4.1_patched/qt/src/MainWindow.cc	2023-04-21 15:55:26.369131085 +0300
+@@ -543,6 +543,7 @@
+ 		for(const QString& langCulture : m_config->searchLangCultures(code)) {
+ 			files.append("/usr/share/myspell/" + langCulture + ".dic");
+ 			files.append("/usr/share/hunspell/" + langCulture + ".dic");
++			files.append("/usr/share/dict/ooo/" + langCulture + ".dic");
+ 		}
+ 		QDBusMessage req = QDBusMessage::createMethodCall("org.freedesktop.PackageKit", "/org/freedesktop/PackageKit", "org.freedesktop.PackageKit.Modify", "InstallProvideFiles");
+ 		req.setArguments(QList<QVariant>() << QVariant::fromValue((quint32)winId()) << QVariant::fromValue(files) << QVariant::fromValue(QString("always")));

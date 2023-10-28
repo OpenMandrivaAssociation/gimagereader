@@ -1,0 +1,13 @@
+--- gimagereader-3.1.2.orig/qt/src/common.hh
++++ gimagereader-3.1.2/qt/src/common.hh
+@@ -22,6 +22,10 @@
+ #include <libintl.h>
+ #define _(x) QString(gettext(x))
+ 
++#ifndef M_PI
++#define M_PI 3.14159265358979323846
++#endif
++
+ class DataObject {
+ public:
+ 	virtual ~DataObject() = default;
