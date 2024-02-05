@@ -3,20 +3,15 @@
 
 Summary:	A simple Gtk/Qt front-end to tesseract-ocr
 Name:		%{oname}
-Version:	3.4.1
+Version:	3.4.2
 Release:	1
 License:	GPLv3+
 Group:		Office
-URL:		https://github.com/manisandro/%{name}
+URL:		https://github.com/manisandro/%{tname}
 Source0:	https://github.com/manisandro/gImageReader/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Patch0:		%{name}-3.1.2-qt_pi.patch
 # (rosa)
 Patch1:		gimagereader-3.4.1-dic-path.patch
-# PoDoFo 0.10 support (fedora)
-Patch10:	0001-Qt-Add-support-for-PoDoFo-0.10.x.patch
-Patch11:	0002-Qt-Drop-PoDoFo-0.9.3-code-path.patch
-Patch12:	0003-Gtk-Add-support-for-PoDoFo-0.10.x.patch
-Patch13:	0004-Gtk-Drop-PoDoFo-0.9.3-code-path.patch
 
 BuildRequires:	appstream-util
 BuildRequires:	cmake ninja
