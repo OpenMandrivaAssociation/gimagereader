@@ -8,7 +8,7 @@ Release:	1
 License:	GPLv3+
 Group:		Office
 URL:		https://github.com/manisandro/%{name}
-Source0:	https://github.com/manisandro/%{tname}/releases/download/v%{version}/%{name}-%{version}.tar.xz
+Source0:	https://github.com/manisandro/gImageReader/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Patch0:		%{name}-3.1.2-qt_pi.patch
 # (rosa)
 Patch1:		gimagereader-3.4.1-dic-path.patch
