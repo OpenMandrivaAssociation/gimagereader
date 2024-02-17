@@ -4,7 +4,7 @@
 Summary:	A simple Gtk/Qt front-end to tesseract-ocr
 Name:		%{oname}
 Version:	3.4.2
-Release:	1
+Release:	2
 License:	GPLv3+
 Group:		Office
 URL:		https://github.com/manisandro/%{tname}
