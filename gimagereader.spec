@@ -3,8 +3,8 @@
 
 Summary:	A simple Gtk/Qt front-end to tesseract-ocr
 Name:		%{oname}
-Version:	3.4.2
-Release:	2
+Version:	3.4.3
+Release:	1
 License:	GPLv3+
 Group:		Office
 URL:		https://github.com/manisandro/%{tname}
@@ -12,6 +12,7 @@ Source0:	https://github.com/manisandro/gImageReader/releases/download/v%{version
 Patch0:		%{name}-3.1.2-qt_pi.patch
 # (rosa)
 Patch1:		gimagereader-3.4.1-dic-path.patch
+Patch2:		gimagereader-3.4.3-libxml++-5.0.patch
 
 BuildRequires:	appstream-util
 BuildRequires:	cmake ninja
@@ -23,7 +24,7 @@ BuildRequires:	pkgconfig(ddjvuapi)
 BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(libarchive)
 BuildRequires:	pkgconfig(libcurl)
-BuildRequires:	pkgconfig(libxml++-2.6)
+BuildRequires:	pkgconfig(libxml++-5.0)
 BuildRequires:	pkgconfig(libpodofo)
 BuildRequires:	pkgconfig(tesseract)
 BuildRequires:	pkgconfig(sane-backends)
@@ -37,19 +38,6 @@ BuildRequires:	pkgconfig(gtksourceview-3.0)
 BuildRequires:	pkgconfig(gtkspellmm-3.0) >= 3.0.4
 BuildRequires:	pkgconfig(libzip)
 BuildRequires:	pkgconfig(poppler-glib)
-# qt5 interface
-BuildRequires:	qmake5
-BuildRequires:	cmake(Qt5)
-BuildRequires:	cmake(Qt5Concurrent)
-BuildRequires:	cmake(Qt5Core)
-BuildRequires:	cmake(Qt5DBus)
-BuildRequires:	cmake(Qt5Network)
-BuildRequires:	cmake(Qt5PrintSupport)
-BuildRequires:	cmake(Qt5Widgets)
-BuildRequires:	cmake(Qt5Xml)
-BuildRequires:	cmake(quazip-qt5)
-BuildRequires:	pkgconfig(poppler-qt5)
-BuildRequires:	pkgconfig(QtSpell-qt5)
 # qt6 interface
 BuildRequires:	qmake-qt6
 BuildRequires:	cmake(Qt6)
@@ -108,36 +96,10 @@ This package contains the Gtk+ front-end.
 
 #----------------------------------------------------------------------------
 
-%package qt5
-Summary:	A Qt5 front-end to tesseract-ocr
-Requires:	%{name}-shared = %{version}-%{release}
-
-%description qt5
-gImageReader is a simple Gtk/Qt front-end to tesseract-ocr.
-
-Features include:
-
-  · Import PDF documents and images from disk, scanning devices, clipboard
-    and screenshots
-  · Process multiple images and documents in one go
-  · Manual or automatic recognition area definition
-  · Recognize to plain text or to hOCR documents
-  · Recognized text displayed directly next to the image
-  · Post-process the recognized text, including spellchecking
-  · Generate PDF documents from hOCR documents
-
-This package contains the Qt5 front-end.
-
-%files qt5
-%{_bindir}/%{name}-qt5
-%{_datadir}/applications/%{name}-qt5.desktop
-%{_metainfodir}/%{name}-qt5.appdata.xml
-
-#----------------------------------------------------------------------------
-
 %package qt6
 Summary:	A Qt6 front-end to tesseract-ocr
 Requires:	%{name}-shared = %{version}-%{release}
+Obsoletes:	%{name}-qt5 < %{EVRD}
 
 %description qt6
 gImageReader is a simple Gtk/Qt front-end to tesseract-ocr.
@@ -186,7 +148,7 @@ Shared files files for %{name}.
 sed -i -e "s,#include <podofo/base/,#include <podofo/main/," gtk/src/hocr/HOCRPdfExporter.cc
 
 %build
-for i in gtk qt5 qt6
+for i in gtk qt6
 do
 	CMAKE_BUILD_DIR=build-$i \
 	%cmake \
@@ -199,11 +161,10 @@ do
 done
 
 %install
-for i in gtk qt5 qt6
+for i in gtk qt6
 do
 	%ninja_install -C build-$i
 done
 
 # locales
 %find_lang %{name} --all-name
-
